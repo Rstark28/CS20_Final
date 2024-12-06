@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>VibeFinder</title>
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/genre.css">
+    <link rel="stylesheet" href="../static/css/playlist.css">
+    <link rel="stylesheet" href="../static/css/events.css">
+</head>
+
+<body>
+
+    <div class="side-dots">
+        <span>•</span>
+        <span>•</span>
+        <span>•</span>
+    </div>
+
+    <section id="genre-section" class="section">
+        <h2 id="genre-select-header">Select Your Favorite Genres</h2>
+        <form id="genre-form">
+            <div id="genre-pills">
+            </div>
+            <button id="show-more" type="button">Show More</button>
+            <button type="button" id="generate-playlist" name="generate-playlist" onclick="generatePlaylist()">GENERATE
+                PLAYLIST</button>
+        </form>
+        <div class="nav-arrows">
+            <div id="genre-nav-arrows" class="nav-arrows"></div>
+        </div>
+    </section>
+
+    <section id="playlist-section" class="section">
+        <h2>Your Playlist</h2>
+        <div id="playlist-container"></div>
+        <div class="nav-arrows">
+            <div id="playlist-nav-arrows" class="nav-arrows"></div>
+        </div>
+    </section>
+
+    <section id="events-section" class="section">
+        <h2>Upcoming Events</h2>
+        <div id="events-container"></div>
+        <div class="nav-arrows">
+            <div id="events-nav-arrows" class="nav-arrows"></div>
+        </div>
+    </section>
+
+    <script src="../static/js/app.js"></script>
+
+</body>
+
+</html>

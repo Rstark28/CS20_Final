@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Alex Johnson",
+    "feedback": "This app has completely changed the way to discover music and events. I love how it brings everything I need into one place!",
+    "role": "Record Producer"
+  },
+  {
+    "name": "Jessica Lee",
+    "feedback": "Thanks to this app, I never miss out on concerts by my favorite artists anymore. The integration with ticket purchasing is seamless.",
+    "role": "Frequent Concert Goer"
+  },
+  {
+    "name": "Mark Davis",
+    "feedback": "Creating playlists and finding live shows has never been easier. I can finally plan my weekends around great music!",
+    "role": "Event Planner"
+  },
+  {
+    "name": "Sophia Brown",
+    "feedback": "I love discovering new artists and then finding out they have events nearby. It's like having a personal music assistant.",
+    "role": "New Artist Explorer"
+  },
+  {
+    "name": "Emily Carter",
+    "feedback": "This app feels like it was made for me. I can't believe how easy it is to find new music and track upcoming events!",
+    "role": "Country Music Superfan"
+  },
+  {
+    "name": "Michael Green",
+    "feedback": "From playlists to live shows, this app has everything I need. It's my go-to platform for discovering and enjoying music.",
+    "role": "Pop Music Songwriter"
+  }
+]

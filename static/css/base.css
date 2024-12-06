@@ -1,0 +1,220 @@
+/* Root Variables */
+:root {
+  --primary-color: #1db954;
+  --secondary-color: #ffffff;
+  --background-color: #191414;
+  --text-color: #ffffff;
+  --light-gray: #b3b3b3;
+  --dark-gray: #282828;
+  --hover-color: #1ed760;
+  --border-color: #1aa34a;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --transition: 0.2s ease-in-out;
+}
+
+/* Global Reset and General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: "Circular Std", "Helvetica Neue", Arial, sans-serif;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--background-color);
+  background-image: radial-gradient(
+      circle at center,
+      #0f0f0f 0.15rem,
+      transparent 0
+    ),
+    radial-gradient(circle at center, #0f0f0f 0.15rem, transparent 0);
+  background-size: 1rem 1rem;
+  background-position: 0 0, 0.5rem 0.5rem;
+  color: var(--text-color);
+}
+
+.section {
+  padding: 50px 20px;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-x: hidden;
+  transition: box-shadow 0.3s ease;
+  flex-direction: column;
+  border-top: 2px solid rgba(180, 180, 180, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Styles */
+button {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  background-color: var(--dark-gray);
+  border: 2px solid var(--border-color);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition),
+    box-shadow var(--transition), transform var(--transition);
+  z-index: 1;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: var(--primary-color);
+  transition: transform 400ms ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+button:hover::before {
+  transform: scaleX(1);
+  transition: transform var(--transition);
+}
+
+button:hover {
+  color: var(--white);
+}
+
+/* Link Styles */
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color var(--transition);
+}
+
+/* Header Section */
+#header-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(-45deg, #158f42, #107738, #191414, #282828);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  border-top: none;
+}
+
+.header-content h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: var(--primary-color);
+  text-transform: 20px;
+  text-shadow: 0px 4-x 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 2s ease;
+}
+
+.header-content p {
+  font-size: 1.5rem;
+  max-width: 800px;
+  margin-bottom: 30px;
+  color: var(--text-color);
+  line-height: 1.8;
+  animation: fadeIn 2.5s ease;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    oapcity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation Arrows */
+.nav-arrows {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.arrow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Side Navigation Dots */
+.side-dots {
+  position: fixed;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.side-dots span {
+  font-size: 2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.side-dots span:hover,
+.side-dots .active {
+  color: var(--hover-color);
+}
+
+@media (max-width: 768px) {
+  .nav-arrows {
+    display: none;
+  }
+}
