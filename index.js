@@ -1,4 +1,5 @@
 // Import required modules
+require("dotenv").config(); // Load environment variables
 const express = require("express");
 const path = require("path");
 const bcrypt = require("bcrypt");
@@ -6,13 +7,14 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const crypto = require("crypto");
+const flash = require("connect-flash");
 
 // Initialize Express app
 const app = express();
 const port = process.env.PORT || 3000;
 
 // MongoDB configuration
-const uri = "mongodb+srv://djangoproj210:123@cluster0.ghk5p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGO_URI;
 const dbName = "User_Auth";
 const collectionName = "users";
 
@@ -37,6 +39,7 @@ async function connectToMongo() {
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
+    process.exit(1); // Exit the process if connection fails
   }
 }
 
@@ -48,8 +51,9 @@ const sessionSecret = process.env.SESSION_SECRET || crypto.randomBytes(64).toStr
 
 // Middleware configuration
 app.set("view engine", "ejs"); // Serve views
-app.use('/static', express.static(path.join(__dirname, 'static'))); // Serve static
+app.use("/static", express.static(path.join(__dirname, "static"))); // Serve static files
 app.use(bodyParser.urlencoded({ extended: true })); // Data parser
+app.use(flash()); // Flash messages
 
 // Session configuration
 app.use(
@@ -57,7 +61,10 @@ app.use(
     secret: sessionSecret,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: {
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      maxAge: 24 * 60 * 60 * 1000, // Session expires after 1 day
+    },
   })
 );
 
@@ -70,21 +77,22 @@ app.get("/", (req, res) => {
 
 // App route
 app.get("/app", (req, res) => {
-  // Redirect to login page if the user is not logged in
   if (!req.session.userId) {
-    return res.redirect("/login");
+    return res.redirect("/login",);
   }
   res.render("app");
 });
 
 // Register route
 app.get("/register", (req, res) => {
-  res.render("register");
+  const errorMessages = req.flash("error");
+  res.render("register", { error: errorMessages });
 });
 
 // Login route
 app.get("/login", (req, res) => {
-  res.render("login");
+  const errorMessages = req.flash("error");
+  res.render("login", { error: errorMessages });
 });
 
 // Logout route
@@ -93,8 +101,7 @@ app.get("/logout", (req, res) => {
     if (err) {
       return res.send("Error during logout.");
     }
-
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 
@@ -106,7 +113,8 @@ app.post("/register", async (req, res) => {
     // Check if the email is already registered
     const existingUser = await usersCollection.findOne({ email });
     if (existingUser) {
-      return res.send("User with this email already exists.");
+      req.flash("error", "Email is already registered.");
+      return res.redirect("/register");
     }
 
     // Hash the user's password
@@ -121,42 +129,60 @@ app.post("/register", async (req, res) => {
 
     await usersCollection.insertOne(newUser);
 
-    // Set session variables
-    req.session.userId = newUser._id;
-    req.session.email = newUser.email;
+    // Regenerate session and set variables
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error("Session regeneration error:", err);
+        req.flash("error", "An error occurred. Please try again.");
+        return res.redirect("/register");
+      }
 
-    res.redirect("/app");
+      req.session.userId = newUser._id;
+      req.session.email = newUser.email;
+
+      res.redirect("/app");
+    });
   } catch (error) {
     console.error("Error during registration:", error);
-    res.send("An error occurred during registration.");
+    req.flash("error", "An error occurred during registration.");
+    res.redirect("/register");
   }
 });
 
-// User login
+// Handle user login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
     const user = await usersCollection.findOne({ email });
     if (!user) {
-      return res.send("No user found with this email.");
+      req.flash("error", "No user found with this email.");
+      return res.redirect("/login");
     }
 
-    // Verify the password
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
     if (!isPasswordValid) {
-      return res.send("Invalid password.");
+      req.flash("error", "Invalid password.");
+      return res.redirect("/login");
     }
 
-    // Set session variables
-    req.session.userId = user._id;
-    req.session.email = user.email;
+    // Regenerate session and set variables
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error("Session regeneration error:", err);
+        req.flash("error", "An error occurred. Please try again.");
+        return res.redirect("/login");
+      }
 
-    res.redirect("/app");
+      req.session.userId = user._id;
+      req.session.email = user.email;
+
+      res.redirect("/app");
+    });
   } catch (error) {
     console.error("Error during login:", error);
-    res.send("An error occurred during login.");
+    req.flash("error", "An error occurred during login.");
+    res.redirect("/login");
   }
 });
 
