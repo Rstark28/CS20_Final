@@ -13,6 +13,7 @@
 
 <body>
     <section id="signup-section" class="section">
+        <h2>Sign Up for Our Service</h2>
         <% if (error && error.length> 0) { %>
             <div class="flash-message error">
                 <% error.forEach((msg)=> { %>
@@ -22,8 +23,6 @@
                     <% }) %>
             </div>
             <% } %>
-
-                <h2>Sign Up for Our Service</h2>
                 <form id="signup-form" action="/register" method="POST" onsubmit="validatePasswords(event)">
                     <div class="form-group">
                         <label for="email">Email:</label>
