@@ -14,16 +14,16 @@
 <body>
     <section id="signup-section" class="section">
         <h2>Sign Up for Our Service</h2>
-        <% if (error && error.length> 0) { %>
-            <div class="flash-message error">
-                <% error.forEach((msg)=> { %>
-                    <p>
-                        <%= msg %>
-                    </p>
-                    <% }) %>
-            </div>
-            <% } %>
-                <form id="signup-form" action="/register" method="POST" onsubmit="validatePasswords(event)">
+        <form id="signup-form" action="/register" method="POST" onsubmit="validatePasswords(event)">
+            <% if (error && error.length> 0) { %>
+                <div class="flash-message error">
+                    <% error.forEach((msg)=> { %>
+                        <p>
+                            <%= msg %>
+                        </p>
+                        <% }) %>
+                </div>
+                <% } %>
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
@@ -37,8 +37,8 @@
                         <input type="password" id="confirm-password" name="confirm-password" required>
                     </div>
                     <button type="submit">Sign Up</button>
-                </form>
-                <p>Already have an account? <a href="/login">Login</a></p>
+        </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
     </section>
     <script src="../static/js/register.js"></script>
     <script src="../static/js/messages.js"></script>
