@@ -59,23 +59,23 @@ document.querySelectorAll('.arrow').forEach(next_arrow => {
     });
 });
 
-// Dynamically create navigation arrows
 function createNavArrows(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
   const arrowUp = document.createElement("button");
   arrowUp.classList.add("arrow", "up");
-  arrowUp.textContent = "▲";
+  arrowUp.innerHTML = '<i class="fas fa-arrow-up"></i>';
   arrowUp.addEventListener("click", () => arrowNavigation("up"));
 
   const arrowDown = document.createElement("button");
   arrowDown.classList.add("arrow", "down");
-  arrowDown.textContent = "▼";
+  arrowDown.innerHTML = '<i class="fas fa-arrow-down"></i>';
   arrowDown.addEventListener("click", () => arrowNavigation("down"));
 
   container.appendChild(arrowUp);
   container.appendChild(arrowDown);
 }
+
 
 ["header-nav-arrows", "story-nav-arrows", "testimonials-nav-arrows"].forEach(createNavArrows);

@@ -7,7 +7,7 @@
   --light-gray: #b3b3b3;
   --dark-gray: #282828;
   --hover-color: #1ed760;
-  --border-color: #1aa34a;
+  --border-color: #14803a;
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   --transition: 0.2s ease-in-out;
 }
@@ -159,9 +159,9 @@ a {
 .nav-arrows {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
   gap: 15px;
   z-index: 10;
   justify-content: center;
@@ -181,11 +181,11 @@ a {
   color: var(--text-color);
   cursor: pointer;
   box-shadow: var(--box-shadow);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .arrow:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
@@ -211,10 +211,4 @@ a {
 .side-dots span:hover,
 .side-dots .active {
   color: var(--hover-color);
-}
-
-@media (max-width: 768px) {
-  .nav-arrows {
-    display: none;
-  }
 }

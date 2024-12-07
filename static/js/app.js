@@ -319,18 +319,30 @@ function createNavArrows(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
+  const homeButton = document.createElement("button");
+  homeButton.classList.add("arrow", "home");
+  homeButton.innerHTML = '<i class="fas fa-home"></i>';
+  homeButton.addEventListener("click", () => window.location.href = "/");
+
   const arrowUp = document.createElement("button");
   arrowUp.classList.add("arrow", "up");
-  arrowUp.textContent = "▲";
+  arrowUp.innerHTML = '<i class="fas fa-arrow-up"></i>';
   arrowUp.addEventListener("click", () => arrowNavigation("up"));
 
   const arrowDown = document.createElement("button");
   arrowDown.classList.add("arrow", "down");
-  arrowDown.textContent = "▼";
+  arrowDown.innerHTML = '<i class="fas fa-arrow-down"></i>';
   arrowDown.addEventListener("click", () => arrowNavigation("down"));
 
+  const logoutButton = document.createElement("button");
+  logoutButton.classList.add("arrow", "logout");
+  logoutButton.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+  logoutButton.addEventListener("click", () => window.location.href = "/logout");
+
+  container.appendChild(homeButton);
   container.appendChild(arrowUp);
   container.appendChild(arrowDown);
+  container.appendChild(logoutButton);
 }
 
 ["genre-nav-arrows", "playlist-nav-arrows", "events-nav-arrows"].forEach(createNavArrows);
