@@ -1,5 +1,4 @@
 // Import required modules
-require("dotenv").config(); // Load environment variables
 const express = require("express");
 const path = require("path");
 const bcrypt = require("bcrypt");
@@ -14,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // MongoDB configuration
-const uri = process.env.MONGO_URI;
+const uri = "mongodb+srv://djangoproj210:123@cluster0.ghk5p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const dbName = "User_Auth";
 const collectionName = "users";
 
@@ -61,10 +60,7 @@ app.use(
     secret: sessionSecret,
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      maxAge: 24 * 60 * 60 * 1000, // Session expires after 1 day
-    },
+    cookie: { secure: false },
   })
 );
 
