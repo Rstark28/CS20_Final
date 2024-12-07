@@ -99,7 +99,6 @@ a {
   transition: color var(--transition);
 }
 
-/* Header Section */
 #header-section {
   display: flex;
   justify-content: center;
@@ -107,7 +106,7 @@ a {
   flex-direction: column;
   background: linear-gradient(-45deg, #158f42, #107738, #191414, #282828);
   background-size: 400% 400%;
-  animation: gradientAnimation 10s ease infinite;
+  animation: gradientAnimation 12s ease infinite;
   border-top: none;
 }
 
@@ -115,9 +114,10 @@ a {
   font-size: 4.5rem;
   font-weight: 900;
   color: var(--primary-color);
-  text-transform: 20px;
-  text-shadow: 0px 4-x 10px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 2s ease;
+  text-transform: uppercase;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .header-content p {
@@ -126,7 +126,8 @@ a {
   margin-bottom: 30px;
   color: var(--text-color);
   line-height: 1.8;
-  animation: fadeIn 2.5s ease;
+  animation: fadeInUp 2.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 @keyframes gradientAnimation {
@@ -143,16 +144,27 @@ a {
   }
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(-20px);
   }
 
   to {
-    oapcity: 1;
+    opacity: 1;
     transform: translateY(0);
   }
+}
+
+.header-content h1:hover {
+  transform: scale(1.05);
+  text-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease, text-shadow 0.4s ease;
+}
+
+.header-content p:hover {
+  opacity: 0.95;
+  transition: opacity 0.4s ease;
 }
 
 /* Navigation Arrows */
