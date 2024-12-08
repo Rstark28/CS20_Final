@@ -1,0 +1,33 @@
+/* Our Story Section */
+#our-story {
+  gap: 50px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--dark-gray);
+  padding: 70px;
+  border-radius: 15px;
+}
+
+
+.story-card h3 {
+  font-size: 1.2rem;
+  margin: 10px 0 5px;
+  color: var(--text-color);
+  font-weight: bold;
+  text-align: center;
+}
+
+.story-card p {
+  font-size: 1.5rem;
+  color: var(--light-gray);
+  text-align: center;
+  margin-bottom: 10px;
+}
