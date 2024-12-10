@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Christopher Bann",
+    "year": "Senior",
+    "major": "Computer Engineer",
+    "image": "../static/images/chris.jpeg"
+  },
+  {
+    "name": "Jack Adkins",
+    "year": "Junior",
+    "major": "Computer Science",
+    "image": "../static/images/jack.jpeg"
+  },
+  {
+    "name": "Matthew Zandi",
+    "year": "Graduate Student",
+    "major": "Computer Science",
+    "image": "../static/images/matthew.jpg"
+  },
+  {
+    "name": "Robert Stark",
+    "year": "Sophomore",
+    "major": "Computer Science",
+    "image": "../static/images/robert.jpg"
+  }
+]

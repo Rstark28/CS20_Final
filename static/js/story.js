@@ -1,20 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const storyContainer = document.getElementById("our-story");
-
-  // Fetch story from the JSON file
-  fetch("../static/json/story.json")
+    const missionContainer = document.getElementById("story");
+  
+    // Fetch mission data from the JSON file
+    fetch("../static/json/story.json")
       .then(response => response.json())
-      .then(story => {
-          story.forEach(story => {
-              const card = document.createElement("div");
-              card.classList.add("story-card");
-
-              card.innerHTML = `
-                  <p>"${story.story}"</p>
-              `;
-
-              storyContainer.appendChild(card);
-          });
+      .then(mission => {
+        const missionHTML = `
+          <h2>${mission.title}</h2>
+          <p>${mission.description}</p>
+        `;
+  
+        missionContainer.innerHTML = missionHTML;
       })
-      .catch(error => console.error("Error loading story:", error));
-});
+      .catch(error => console.error("Error loading mission data:", error));
+  });
+  
