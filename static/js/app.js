@@ -24,21 +24,20 @@ function scrollToSection(section_id) {
 // Note: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 //       was utilized for this section
 let observer = new IntersectionObserver(
-  (next_entr) => {
-    next_entr.forEach((entr) => {
-      if (entr.isIntersecting) {
-        let section_id = entr.target.id;
-        current_section = section_id; // Update the current section
+  (entrs) => {
+    entrs.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let section_id = entry.target.id;
+        current_section = section_id;
 
-        // Update the side navigation dots properly
         let found_idx = all_sections.indexOf(section_id);
-        document.querySelectorAll(".side-dots span").forEach((dot, index) => {
-          dot.classList.toggle("active", index == found_idx);
+        document.querySelectorAll('.side-dots span').forEach((dot, index) => {
+          dot.classList.toggle('active', index == found_idx);
         });
       }
     });
   },
-  { threshold: 0.5 } // Trigger when 50% of the section is visible on the page
+  { threshold: 0.1 }
 );
 
 // Observe each section to track visibility
@@ -158,10 +157,19 @@ async function generatePlaylist() {
     // show the user 12 randomly fetched tracks from the Spotify API
     let final_tracks = unique.slice(0, 12);
     displayPlaylist(final_tracks);
-    scrollToSection("playlist-section");
+
+    updateObserver(); // Update the Intersection Observer for dynamic changes
+    scrollToSection("playlist-section"); // Scroll to the playlist section
   } catch (error) {
     console.error("Error fetch playlist:", error);
   }
+}
+
+function updateObserver() {
+  observer.disconnect(); // Stop observing each defined section
+  document.querySelectorAll("section").forEach((section) => {
+    observer.observe(section); // Reovserve all the defined sections, even when section expands (e.g., playlist/events sections)
+  });
 }
 
 // Displays the playlist tracks in the playlist container of the HTML
@@ -206,6 +214,8 @@ function displayPlaylist(tracks) {
         `;
     container.appendChild(trackElement); // Append the track element to the HTML container holding all of the data
   });
+
+  updateObserver();
 }
 
 // Initialize the playlist display with an empty state
