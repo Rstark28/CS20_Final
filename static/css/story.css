@@ -48,3 +48,23 @@
 .overlay p {
   margin: 5px 0;
 }
+
+
+.story {
+  margin: 40px auto;
+  max-width: 600px;
+  padding: 20px;
+  text-align: left;
+  background-color: #5b5b5b;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.story h2 {
+  text-align: center;
+}
+
+.story p {
+  line-height: 1.6;
+  font-size: 1rem;
+}
