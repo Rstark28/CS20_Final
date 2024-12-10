@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const storyContainer = document.getElementById("our-story");
   
     // Fetch team data from the JSON file
-    fetch("../static/json/story.json")
+    fetch("../static/json/team.json")
       .then(response => response.json())
       .then(teamMembers => {
         teamMembers.forEach(member => {
