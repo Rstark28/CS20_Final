@@ -27,9 +27,7 @@
 
 .testimonial-card h3 {
     font-size: 1.2rem;
-    margin: 10px 0 5px;
     color: var(--text-color);
-    font-weight: bold;
     text-align: center;
 }
 
@@ -37,11 +35,27 @@
     font-size: 1rem;
     color: var(--light-gray);
     text-align: center;
+    margin: 10px;
+}
+
+.testimonial-card p.name-role {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
     margin-bottom: 10px;
 }
 
-.testimonial-card span {
-    font-weight: bold;
-    color: var(--primary-color);
+.star-rating .star {
+    font-size: 1.5rem;
+    padding: 0 5px;
     transition: color var(--transition);
+}
+
+.star-rating .star.filled {
+    color: #FFD700;
 }
