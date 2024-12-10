@@ -394,6 +394,7 @@ function displayAllEvents(events) {
 
     eventsContainer.appendChild(next_event); // Append the processed events card to the HMTL container
   });
+  updateObserver(); // Update the Intersection Observer for dynamic changes
 }
 
 // Add click event listnener to the playlist container to fetch events
