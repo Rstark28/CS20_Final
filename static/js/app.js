@@ -33,7 +33,7 @@ let observer = new IntersectionObserver(
         // Update the side navigation dots properly
         let found_idx = all_sections.indexOf(section_id);
         document.querySelectorAll(".side-dots span").forEach((dot, index) => {
-          dot.classList.toggle("active", index == found_idx); 
+          dot.classList.toggle("active", index == found_idx);
         });
       }
     });
@@ -72,7 +72,6 @@ document.querySelectorAll(".arrow").forEach((next_arrow) => {
 
 // Spotify API Logic
 
-
 let accessToken = null; // Stores the Spotify access token
 let tokenExpirationTime = 0; // Tracks when the token expiress
 
@@ -82,7 +81,7 @@ async function fetchAccessToken() {
     "https://whispering-meadow-56072-ba39b0cc37be.herokuapp.com/token"
   );
   const data = await response.json();
-  accessToken = data.access_token; // Save the new token 
+  accessToken = data.access_token; // Save the new token
   tokenExpirationTime = Date.now() + data.expires_in * 1000; // Calculate expiration time
 }
 
@@ -225,26 +224,41 @@ document.addEventListener("DOMContentLoaded", async function () {
       let response = await fetch("../static/json/genres.json"); // Fetch genres from a JSON file
       let found_genres = await response.json();
 
-      // Create a pill for each genre
-      found_genres.forEach((next_genre) => {
+      const randomGenres = getRandomGenres(found_genres, 30); // Get 50 random genres
+
+      // Create a pill for each randomly selected genre
+      randomGenres.forEach((next_genre) => {
         let next_pill = document.createElement("span");
         next_pill.classList.add("genre-pill");
         next_pill.setAttribute(
           "data-value",
-          next_genre.toLowerCase().replace(/ /g, "_") // Convert genre to the proper format using regex expression/search for whitespace
+          next_genre.name.toLowerCase().replace(/ /g, "_") // Convert genre to the proper format using regex expression/search for whitespace
         );
-        next_pill.textContent = next_genre;
+        next_pill.textContent = next_genre.name;
 
         // Toggle genre selection on click
         next_pill.addEventListener("click", () => toggle_genre(next_pill));
         all_genre_container.appendChild(next_pill);
       });
 
-      all_pills = document.querySelectorAll(".genre-pill");  // Cache all the pills that are present on the page
-      update_vis_pills();  // Update visibility based on the screen size of the current window
+      all_pills = document.querySelectorAll(".genre-pill"); // Cache all the pills that are present on the page
+      update_vis_pills(); // Update visibility based on the screen size of the current window
     } catch (error) {
-      console.log("Unable to fetch genres!");
+      console.log("Unable to fetch genres!", error);
     }
+  }
+
+  function getRandomGenres(genres, n) {
+    let randomGenres = [];
+    let genreCopy = [...genres];
+
+    while (randomGenres.length < n) {
+      const randomIndex = Math.floor(Math.random() * genreCopy.length);
+      const genre = genreCopy.splice(randomIndex, 1)[0];
+      randomGenres.push(genre);
+    }
+
+    return randomGenres;
   }
 
   // Toggle a genre's selection state and updates the selectedGenres array
@@ -391,7 +405,7 @@ document
     grabEvents(artist_name); // Fetch events for the selected artis
   });
 
-  // Initialize the events container with an empty state
+// Initialize the events container with an empty state
 displayAllEvents([]);
 
 // Dynamically create navigation arrows for navigation between sections
