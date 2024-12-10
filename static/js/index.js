@@ -25,19 +25,29 @@ function scrollToSection(section_id) {
 // Note: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 //       was utilized for this section
 let observer = new IntersectionObserver(
+    // Callback function executed whenevere the obvsered elements' intersection status changes
     (entrs) => {
       entrs.forEach((entry) => {
+        // Check if the element is currently intersecting with the current screen
         if (entry.isIntersecting) {
+            // Get the ID of the intersection section
           let section_id = entry.target.id;
+
+          // Update the current section to the ID of the visible section
           current_section = section_id;
-  
+            
+          // Find the index of the currently visible section in the all_sections array
           let found_idx = all_sections.indexOf(section_id);
+
+          // Update the visual side dots to reflext the active section
           document.querySelectorAll('.side-dots span').forEach((dot, index) => {
+            // Toggle the 'active' class: add it for the active section, remove it for all the other sections
             dot.classList.toggle('active', index == found_idx);
           });
         }
       });
     },
+    // The observer triggers when at least 10% of the element is visible
     { threshold: 0.1 }
   );
   
