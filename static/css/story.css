@@ -2,6 +2,10 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .our-story {
@@ -10,6 +14,7 @@
   height: 150px;
   overflow: hidden;
   border-radius: 50%;
+  margin: 10px;
 }
 
 .our-story img {
@@ -45,7 +50,7 @@
   overflow: hidden; 
 }
 
-.profile:hover .overlay {
+.our-story:hover .overlay {
   opacity: 1; 
 }
 
@@ -78,3 +83,56 @@
   font-size: 1.2rem; 
   margin-bottom: 0; 
 }
+
+@media screen and (max-width: 768px) {
+  .story-container {
+    gap: 15px;
+  }
+
+  .our-story {
+    height: 130px;
+    width: 130px
+  }
+
+  .story {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .story h2 {
+    font-size: 1.8rem;
+  }
+
+  .story p {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .story-container {
+    gap: 10px;
+  }
+
+  .our-story {
+    width: 100px;
+    height: 100px;
+  }
+
+  .overlay p {
+    font-size: 0.8rem;
+  }
+
+  .story {
+    margin: 15px auto;
+    padding: 15px;
+  }
+
+  .story h2 {
+    font-size: 1.5rem;
+  }
+
+  .story p {
+    font-size: 1rem;
+  }
+}
+

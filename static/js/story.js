@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const missionContainer = document.getElementById("story");
+    missionContainer.className = "story";
   
     // Fetch mission data from the JSON file
     fetch("../static/json/story.json")

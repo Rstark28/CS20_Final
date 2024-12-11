@@ -15,12 +15,12 @@
     "name": "Matthew Zandi",
     "year": "Graduate Student",
     "major": "Computer Science",
-    "image": "../static/images/matthew.jpg"
+    "image": "../static/images/matthew.jpeg"
   },
   {
     "name": "Robert Stark",
     "year": "Sophomore",
     "major": "Computer Science",
-    "image": "../static/images/robert.jpg"
+    "image": "../static/images/robert.jpeg"
   }
 ]

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const storyContainer = document.getElementById("our-story");
+    const storyContainer = document.getElementById("story-container");
+    storyContainer.className = "story-container";
   
     // Fetch team data from the JSON file
     fetch("../static/json/team.json")
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(teamMembers => {
         teamMembers.forEach(member => {
           const card = document.createElement("div");
-          card.classList.add("profile");
+          card.classList.add("our-story");
   
           card.innerHTML = `
             <img src="${member.image}" alt="${member.name}">
