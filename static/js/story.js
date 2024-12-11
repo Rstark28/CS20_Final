@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.json())
       .then(mission => {
         const missionHTML = `
-          <h2>${mission.title}</h2>
           <p>${mission.description}</p>
         `;
   
